@@ -6,9 +6,7 @@
  *  LICENSE file in the root directory of this source tree. An additional grant
  *  of patent rights can be found in the PATENTS file in the same directory.
  */
-
-#ifndef FATAL_INCLUDE_fatal_type_impl_trie_h
-#define FATAL_INCLUDE_fatal_type_impl_trie_h
+#pragma once
 
 #include <fatal/type/array.h>
 #include <fatal/type/conditional.h>
@@ -107,7 +105,7 @@ struct l<Offset, Filter, n<Haystack, IsTerminal, Begin, End, Children...>> {
 
     if (!IsTerminal && size == End - Begin - Offset) {
       return false;
-    };
+    }
 
     using value_type = typename std::iterator_traits<
       typename std::decay<NeedleBegin>::type
@@ -349,5 +347,3 @@ struct e<Filter, Variadic<>> {
 
 } // namespace i_t {
 } // namespace fatal {
-
-#endif // FATAL_INCLUDE_fatal_type_impl_trie_h

@@ -6,9 +6,7 @@
  *  LICENSE file in the root directory of this source tree. An additional grant
  *  of patent rights can be found in the PATENTS file in the same directory.
  */
-
-#ifndef FATAL_INCLUDE_fatal_type_deprecated_type_map_h
-#define FATAL_INCLUDE_fatal_type_deprecated_type_map_h
+#pragma once
 
 #include <fatal/portability.h>
 #include <fatal/type/conditional.h>
@@ -667,9 +665,9 @@ public:
 
   template <typename TKey, typename TVisitor, typename... VArgs>
   static constexpr bool visit(TVisitor &&visitor, VArgs &&...args) {
-    using mapped = find<TKey, detail::type_map_impl::visit_not_found>;
+    using found = find<TKey, detail::type_map_impl::visit_not_found>;
 
-    return detail::type_map_impl::visit_visitor<TKey, mapped>::visit(
+    return detail::type_map_impl::visit_visitor<TKey, found>::visit(
       std::forward<TVisitor>(visitor),
       std::forward<VArgs>(args)...
     );
@@ -1296,5 +1294,3 @@ struct binary_search_comparer {
 } // namespace type_map_impl {
 } // namespace detail {
 } // namespace fatal {
-
-#endif // FATAL_INCLUDE_fatal_type_deprecated_type_map_h

@@ -6,9 +6,7 @@
  *  LICENSE file in the root directory of this source tree. An additional grant
  *  of patent rights can be found in the PATENTS file in the same directory.
  */
-
-#ifndef FATAL_INCLUDE_fatal_type_call_traits_h
-#define FATAL_INCLUDE_fatal_type_call_traits_h
+#pragma once
 
 #include <fatal/preprocessor.h>
 #include <fatal/type/apply.h>
@@ -163,7 +161,7 @@ public:
    */
   template <typename T, typename... Args>
   using supports = decltype(
-    is_impl<Args...>::template sfinae(static_cast<T *>(nullptr))
+    is_impl<Args...>::template sfinae<>(static_cast<T *>(nullptr))
   );
 };
 
@@ -226,7 +224,7 @@ public:
       struct bind { \
         template <typename... UArgs> \
         using supports = decltype( \
-          member_fn_supports_impl<UArgs...>::template sfinae( \
+          member_fn_supports_impl<UArgs...>::template sfinae<>( \
             static_cast<typename ::std::remove_reference<U>::type *>(nullptr) \
           ) \
         ); \
@@ -840,5 +838,3 @@ struct call_if<false> {
 } // namespace call_traits_impl {
 } // namespace detail {
 } // namespace fatal {
-
-#endif // FATAL_INCLUDE_fatal_type_call_traits_h

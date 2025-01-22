@@ -6,9 +6,7 @@
  *  LICENSE file in the root directory of this source tree. An additional grant
  *  of patent rights can be found in the PATENTS file in the same directory.
  */
-
-#ifndef FATAL_INCLUDE_fatal_container_legacy_variant_h
-#define FATAL_INCLUDE_fatal_container_legacy_variant_h
+#pragma once
 
 #include <fatal/container/optional.h>
 #include <fatal/container/unitary_union.h>
@@ -1283,7 +1281,7 @@ public:
   template <typename UCallable, typename... UArgs, typename std::enable_if<
     is_supported<
       typename std::decay<
-        typename std::result_of<UCallable&(UArgs...)>::type
+        typename std::invoke_result<UCallable&, UArgs...>::type
       >::type
     >(), int
   >::type = 0>
@@ -1295,7 +1293,7 @@ public:
   template <typename UCallable, typename... UArgs, typename std::enable_if<
     !is_supported<
       typename std::decay<
-        typename std::result_of<UCallable&(UArgs...)>::type
+        typename std::invoke_result<UCallable&, UArgs...>::type
       >::type
     >(), int
   >::type = 0>
@@ -2136,5 +2134,3 @@ private:
 } // namespace std {
 
 FATAL_DIAGNOSTIC_POP
-
-#endif // FATAL_INCLUDE_fatal_container_legacy_variant_h
